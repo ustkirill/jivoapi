@@ -1,0 +1,21 @@
+{
+  "name": "jivoapi",
+  "description": "JivoSIte for developers",
+  "main": "",
+  "authors": [
+    "Kirill Ust <ustkirill@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#^0.10.7",
+    "polymer": "^1.8.1"
+  }
+}

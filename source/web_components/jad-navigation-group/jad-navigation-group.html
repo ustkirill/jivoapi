@@ -1,0 +1,223 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="jad-navigation-group">
+    <template>
+        <style lang="scss">
+            $jad-navigation-gray: #eff2f8;
+            $jad-navigation-green: #00bf59;
+
+            $jad-color-main: #6b7b93;
+            $jad-color-dkblue: #23233b;
+
+            .jad-navigation-wrapper {
+                &.fixed {
+                    position: fixed;
+                    top: 0;
+                }
+            }
+            .nav-section {
+                margin-bottom: 50px;
+
+                span {
+                    display: block;
+                    margin-bottom: 5px;
+                    font: 700 17px/27.2px 'Circe';
+                    color: $jad-color-dkblue;
+                }
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        > a {
+                            display: block;
+                            padding: 6px 20px 4px;
+                            margin-bottom: 5px;
+                            text-decoration: none;
+                            border-radius: 2px;
+                            font-size: 15px;
+                            line-height: 26.4px;
+                            color: $jad-color-main;
+                        }
+
+                        &:hover {
+                            > a {
+                                background-color: $jad-navigation-gray;
+                            }
+                        }
+                        &.active {
+                            > a {
+                                background-color: $jad-navigation-green;
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
+            }
+            .jad-navigation-toggle {
+                position: relative;
+                padding: 0;
+                background: #fff;
+                border: none;
+                position: absolute;
+                top: 50%;
+                margin-top: -9px;
+                left: 20px;
+                display: none;
+                outline: none;
+
+                .icon-bar {
+                    display: block;
+                    width: 27px;
+                    height: 2px;
+                    border-radius: 1px;
+                    background-color: #00bf54;
+                    margin-bottom: 6px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        </style>
+        <button type="button" class="jad-navigation-toggle" on-click="toggle">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="jad-navigation-wrapper">
+            <template is="dom-repeat" items="[[links]]">
+                <div class="nav-section">
+                    <span>{{item.title}}</span>
+                    <ul>
+                        <template is="dom-repeat" items="{{item.links}}" as="link">
+                            <li>
+                                <a href="{{link.href}}" on-click="go">{{link.title}}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+        var current = null,
+            rootElement = null;
+
+        const fixed = 'fixed',
+              active = 'active',
+              opened = 'jad-opened';
+
+        function removeClass(obj, cls) {
+            let classes = obj.className.split(' ');
+
+            for (let i = 0; i < classes.length; i++) {
+                if (classes[i] == cls) {
+                    classes.splice(i, 1);
+                    i--;
+                }
+            }
+            obj.className = classes.join(' ');
+        }
+
+        Polymer({
+            is: "jad-navigation-group",
+            go: function(e, hash) {
+                let id = typeof hash == 'string' ? hash : e.srcElement.hash;
+
+                if (current) {
+                    removeClass(current.parentElement, active);
+                }
+
+                current = rootElement.querySelector('[href="' + id + '"]');
+
+                current.parentElement.className += ' ' + active;
+            },
+            attached: function() {
+                let hash = window.location.hash;
+
+                rootElement = document.getElementsByClassName('jad-navigation-wrapper')[0];
+
+                if (this.type === fixed) {
+                    document.body.onscroll = this.changeActive;
+                }
+
+                this.go({}, hash);
+            },
+            changeActive: function() {
+                // if (rootElement.offsetTop < document.body.scrollTop && rootElement.className.indexOf(fixed) === -1) {
+                //     rootElement.className += ' ' + fixed;
+                // } else if (rootElement.offsetTop >= document.body.scrollTop) {
+                //     removeClass(rootElement, fixed);
+                // }
+            },
+            toggle: function() {
+                let body = document.getElementsByTagName('body')[0];
+
+                if (rootElement.className.indexOf(opened) === -1 ) {
+                    rootElement.className += ' ' + opened;
+                    body.className += ' ' + opened;
+                } else {
+                    removeClass(rootElement, opened);
+                    removeClass(body, opened);
+                }
+            },
+            properties: {
+                type: {
+                    type: String,
+                    value: fixed
+                },
+                links: {
+                    type: Array,
+                    value: [{
+                        title: 'Javascript API',
+                        links: [{
+                            title: 'Methods and functions',
+                            href: '#Methods_and_functions'
+                        }, {
+                            title: 'chatMode',
+                            href: '#chatMode'
+                        }, {
+                            title: 'getContactInfo',
+                            href: '#getContactInfo'
+                        }, {
+                            title: 'getVisitorNumber',
+                            href: '#getVisitorNumber'
+                        }, {
+                            title: 'setContactInfo',
+                            href: '#setContactInfo'
+                        }, {
+                            title: 'setCustomData',
+                            href: '#setCustomData'
+                        }, {
+                            title: 'setRules',
+                            href: '#setRules'
+                        }, {
+                            title: 'setUserToken',
+                            href: '#setUserToken'
+                        }, {
+                            title: 'showProactiveInvitation',
+                            href: '#showProactiveInvitation'
+                        }]
+                    }, {
+                        title: 'Webhooks',
+                        links: [{
+                            title: 'Events',
+                            href: '#Events'
+                        }, {
+                            title: 'chat_accepted',
+                            href: '#chat_accepted'
+                        }, {
+                            title: 'chat_finished',
+                            href: '#chat_finished'
+                        }, {
+                            title: 'offline_message',
+                            href: '#offline_message'
+                        }]
+                    }],
+                }
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Circe';
+    src: url('/fonts/Circe-Light/Circe-Light.eot');
+    src: url('/fonts/Circe-Light/Circe-Light.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Circe-Light/Circe-Light.woff') format('woff'),
+       url('/fonts/Circe-Light/Circe-Light.ttf') format('truetype'),
+       url('/fonts/Circe-Light/Circe-Light.svg#Circe-Light') format('svg');
+
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url('/fonts/Circe-Bold/Circe-Bold.eot');
+    src: url('/fonts/Circe-Bold/Circe-Bold.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Circe-Bold/Circe-Bold.woff') format('woff'),
+       url('/fonts/Circe-Bold/Circe-Bold.ttf') format('truetype'),
+       url('/fonts/Circe-Bold/Circe-Bold.svg#Circe-Bold') format('svg');
+
+    font-weight: 700;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');

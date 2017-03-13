@@ -1,0 +1,98 @@
+---
+title: JivoSite API for developers
+layout: jivoapi
+---
+
+<div id="jivosite-api-docs">
+	<div class="jad-navigation-block">
+		<div class="jivosite-api-logo">
+			<a href="/">for developers</a>
+		</div>
+		<jad-navigation-group></jad-navigation-group>
+	</div>
+	<div class="jad-content-block">
+		<div class="jad-content">
+			<div class="jad-section">
+				<h1>JivoSite API для разработчиков</h1>
+				<div class="jad-group">
+					<p>JivoSite предоставляет разработчикам два набора инструментов для интеграции:</p>
+					<p><b>Клиентская часть - JavaScript API виджета</b>, позволяющее управлять виджетом, который отображается пользователю. С помощью него можно управлять окном чата, а так же передавать произвольную информацию со страницы, на которой размещено окно чата, в приложение оператора (например, можно передать дополнительную информацию о пользователе, которая так же будет сохранена в журнале диалогов).</p>
+				</div>
+				<div class="jad-group">
+					<p><b>Серверная часть - Webhooks API</b>, позволяющее получать уведомления о начале или завершении чата на стороне вашего сервера, а так же передавать в JivoSite дополнительную информацию для отображения в приложени оператора в ответе на HTTP-запросы.</p>
+				</div>
+			</div>
+			<div class="jad-section">
+				<h3>JavaScript API</h3>
+				<h4 id="Methods_and_functions" class="jad-anchor">Methods and functions</h4>
+				<div class="jad-group">
+					<p>JivoSite вызывает перечисленные ниже функции на странице, чтобы сообщить о возникновении события. Вы можете объявить на странице любую из этих функций и выполнять в ней логику обработки возникшего события. Например, по событию jivo_onIntroduction вы можете получить введенные клиентом контактные данные.</p>
+				</div>
+			</div>
+			<div class="jad-section">
+				<div class="jad-group">
+					<span>Сallback-функции</span>
+					<table>
+						<thead>
+							<tr>
+								<th>Название</th>
+								<th>Тип</th>
+								<th>Описание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a href="#">jivo_onLoadCallback</a></td>
+								<td>void</td>
+								<td>Вызывается при завершении инициализации виджета JivoSite</td>
+							</tr>
+							<tr>
+								<td><a href="#">jivo_onOpen</a></td>
+								<td>void</td>
+								<td>Вызывается при открытии окна диалога JivoSite</td>
+							</tr>
+							<tr>
+								<td><a href="#">jivo_onClose</a></td>
+								<td>void</td>
+								<td>Сворачивание окна диалога JivoSite</td>
+							</tr>
+							<tr>
+								<td><a href="#">jivo_onIntroduction</a></td>
+								<td>void</td>
+								<td>Посетитель ввёл контактные данные</td>
+							</tr>
+							<tr>
+								<td><a href="#">jivo_onResizeCallback</a></td>
+								<td>void</td>
+								<td>Коллбек, срабатывающий при любом изменении размеров виджета</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="jad-section">
+				<div class="jad-group">
+					<h4 id="chatMode" class="jad-anchor">chatMode</h4>
+					<div class="jad-note-wrapper">
+						<p>С помощью этого метогода можно получить текущее состояние операторов.</p>
+						<div class="jad-note">
+							jivo_api.chatMode();
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="jad-section">
+				<div class="jad-group">
+					<h4 id="getContactInfo" class="jad-anchor">getContactInfo</h4>
+					<div class="jad-note-wrapper">
+						<p>Считывает данные посетителя в виде структуры contact_info, которые посетитель ввел в форме представления. Если посетитель не заполнил какие-либо поля, в их значении будет null.</p>
+						<div class="jad-note">
+							jivo_api.getContactInfo();
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="jad-notices"></div>
+	</div>
+</div>
